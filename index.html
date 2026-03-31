@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EASe: Excite, Attend and Segment</title>
+    <style>
+        :root {
+            --accent: #4a6178;
+            --text: #111;
+            --text-muted: #666;
+            --bg: #fff;
+            --bg-alt: #fafafa;
+            --border: #e0e0e0;
+            --max-w: 900px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text); background: var(--bg); line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+        header { padding: 80px 0 40px; text-align: center; }
+        h1 { font-size: 2.4rem; font-weight: 700; line-height: 1.2; margin-bottom: 10px; letter-spacing: -0.02em; }
+        h1 .accent { color: var(--accent); }
+        .subtitle { font-size: 1.05rem; color: var(--text-muted); font-weight: 400; margin-bottom: 28px; max-width: 680px; margin-left: auto; margin-right: auto; }
+        .authors { margin-bottom: 6px; font-size: 1.1rem; }
+        .authors span { font-weight: 500; }
+        .affiliation { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 32px; }
+        .links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 999px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s ease; border: 1.5px solid var(--border); color: var(--text-muted); background: var(--bg); }
+        .btn:hover { border-color: var(--text); color: var(--text); }
+        .btn-disabled { cursor: default; pointer-events: none; opacity: 0.55; }
+        .btn svg { width: 18px; height: 18px; }
+        .divider { width: 48px; height: 1px; background: var(--border); margin: 0 auto; }
+        section { padding: 48px 0; }
+        h2 { color: var(--accent); font-size: 1.3rem; font-weight: 600; margin-bottom: 20px; letter-spacing: -0.01em; }
+        .main-figure { margin: 48px 0; text-align: center; }
+        .main-figure img { max-width: 100%; border-radius: 4px; }
+        .main-figure .caption { margin-top: 14px; font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; max-width: 720px; margin-left: auto; margin-right: auto; }
+        .abstract-text { font-size: 0.98rem; color: #333; text-align: justify; line-height: 1.8; }
+        .keywords { margin-top: 16px; font-size: 0.84rem; color: var(--text-muted); }
+        .keywords strong { color: var(--text); }
+        .results-viewer { text-align: center; }
+        .results-frame { position: relative; width: 100%; padding-bottom: 70.83%; overflow: hidden; }
+        .results-frame img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: fill; opacity: 0; transition: opacity 0.5s ease; }
+        .results-frame img.active { opacity: 1; }
+        .component-frame { position: relative; width: 100%; padding-bottom: 64%; overflow: hidden; }
+        .component-frame img { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 100%; max-height: 100%; object-fit: contain; opacity: 0; transition: opacity 0.5s ease; }
+        .component-frame img.active { opacity: 1; }
+        .results-nav { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+        .results-nav button { padding: 6px 16px; border: 1.5px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text-muted); font-size: 0.78rem; font-weight: 500; font-family: inherit; cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; letter-spacing: 0.04em; }
+        .results-nav button:hover { border-color: var(--text); color: var(--text); }
+        .results-nav button.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+        footer { text-align: center; padding: 48px 0; color: var(--text-muted); font-size: 0.82rem; border-top: 1px solid var(--border); margin-top: 24px; }
+        footer a { color: var(--text); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 640px) {
+            header { padding: 48px 0 24px; }
+            h1 { font-size: 1.7rem; }
+            .links { flex-direction: column; align-items: center; }
+            section { padding: 32px 0; }
+            .results-nav { gap: 4px; }
+            .results-nav button { padding: 5px 10px; font-size: 0.72rem; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1><span class="accent">EASe</span>: Excite, Attend and Segment</h1>
+        <p class="subtitle">Domain-Agnostic Fine-Grained Mask Discovery with Feature Calibration and Self-Supervised Upsampling</p>
+        <p class="authors"><span>Deepank Singh</span> &middot; <span>Anurag Nihal</span> &middot; <span>Vedhus Hoskere</span></p>
+        <p class="affiliation">University of Houston</p>
+        <div class="links">
+            <a class="btn btn-disabled" title="Coming soon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
+                Paper (coming soon)
+            </a>
+            <a class="btn btn-disabled" title="Coming soon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"/></svg>
+                Code (coming soon)
+            </a>
+        </div>
+    </div>
+</header>
+<main class="container">
+    <div class="main-figure">
+        <img src="images/EASe.jpg" alt="EASe framework overview">
+        <p class="caption"><strong>Overview of EASe.</strong> SAUCE lifts coarse foundation model tokens to pixel-level features via SE-calibrated cross-attention, where channel-excited features serve as values and key modulators through SFT conditioning. CAFE then quantizes these features into prototypes, refines them through attention-guided grouping, and hierarchically merges them into multi-granularity segmentation masks.</p>
+    </div>
+    <div class="divider"></div>
+    <section>
+        <h2>Abstract</h2>
+        <p class="abstract-text">Unsupervised segmentation approaches have increasingly leveraged foundation models to improve salient object discovery. However, these methods often falter in scenes with complex, multi-component morphologies, where fine-grained structural detail is indispensable. Many state-of-the-art unsupervised segmentation pipelines rely on mask discovery approaches that utilize coarse, patch-level representations. These coarse representations inherently suppress the fine-grained detail required to resolve such complex morphologies. To overcome this limitation, we propose <strong>E</strong>xcite, <strong>A</strong>ttend and <strong>Se</strong>gment (EASe), an unsupervised domain-agnostic semantic segmentation framework for <em>easy</em> fine-grained mask discovery across challenging real-world scenes. EASe utilizes novel <strong>S</strong>emantic-<strong>A</strong>ware <strong>U</strong>psampling with <strong>C</strong>hannel <strong>E</strong>xcitation (SAUCE) to <em>excite</em> low-resolution FM feature channels for selective calibration and <em>attends</em> across spatially-encoded image and FM features to recover full-resolution semantic representations. Finally, EASe <em>segments</em> the aggregated features into multi-granularity masks using a novel training-free <strong>C</strong>ue-<strong>A</strong>ttentive <strong>F</strong>eature Aggr<strong>e</strong>gator (CAFE) which leverages SAUCE attention scores as a semantic grouping signal. EASe, together with SAUCE and CAFE, operate directly at pixel-level feature representations to enable accurate fine-grained dense semantic mask discovery. Our evaluation demonstrates superior performance of EASe over previous state-of-the-arts across major standard benchmarks and diverse datasets with complex morphologies.</p>
+        <p class="keywords"><strong>Keywords:</strong> Unsupervised segmentation &middot; Image segmentation &middot; Squeeze-and-excitation &middot; Domain-agnostic &middot; Feature upsampling &middot; Foundation models</p>
+    </section>
+    <div class="divider"></div>
+    <section style="text-align: center;">
+        <h2>Unsupervised Semantic Segmentation Results</h2>
+        <div class="results-viewer">
+            <div class="results-frame" id="results-frame"></div>
+            <div class="results-nav" id="results-nav"></div>
+        </div>
+    </section>
+    <div class="divider"></div>
+    <section style="text-align: center;">
+        <h2>Component Details</h2>
+        <div class="results-viewer">
+            <div class="component-frame" id="component-frame"></div>
+            <div class="results-nav" id="component-nav"></div>
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="container"></div>
+</footer>
+<script>
+const datasets = [
+    { src: "images/ADE20K_figure.jpg", name: "ADE20K" },
+    { src: "images/VOC20_figure.jpg", name: "PASCAL VOC" },
+    { src: "images/COCO_Stuff_27_figure.jpg", name: "COCO-Stuff" },
+    { src: "images/Cityscapes_27_figure.jpg", name: "Cityscapes" },
+    { src: "images/PartImageNet_figure.jpg", name: "PartImageNet" },
+    { src: "images/NEHRI_figure.jpg", name: "RSDD" },
+    { src: "images/OmniCrack_figure.jpg", name: "OmniCrack" }
+];
+const frame = document.getElementById('results-frame');
+const nav = document.getElementById('results-nav');
+let current = 0;
+let autoTimer = null;
+datasets.forEach((d, i) => {
+    const img = document.createElement('img');
+    img.src = d.src; img.alt = d.name + ' results';
+    frame.appendChild(img);
+    const btn = document.createElement('button');
+    btn.textContent = d.name;
+    btn.addEventListener('click', () => { clearInterval(autoTimer); autoTimer = null; showResult(i); });
+    nav.appendChild(btn);
+});
+function showResult(idx) {
+    current = idx;
+    frame.querySelectorAll('img').forEach((img, i) => img.classList.toggle('active', i === idx));
+    nav.querySelectorAll('button').forEach((b, i) => b.classList.toggle('active', i === idx));
+}
+function advance() { showResult((current + 1) % datasets.length); }
+showResult(0);
+autoTimer = setInterval(advance, 2500);
+
+const components = [
+    { src: "images/SAUCE.png", name: "SAUCE" },
+    { src: "images/CAFE.png", name: "CAFE" }
+];
+const compFrame = document.getElementById('component-frame');
+const compNav = document.getElementById('component-nav');
+components.forEach((d, i) => {
+    const img = document.createElement('img');
+    img.src = d.src; img.alt = d.name + ' architecture';
+    compFrame.appendChild(img);
+    const btn = document.createElement('button');
+    btn.textContent = d.name;
+    btn.addEventListener('click', () => showComponent(i));
+    compNav.appendChild(btn);
+});
+function showComponent(idx) {
+    compFrame.querySelectorAll('img').forEach((img, i) => img.classList.toggle('active', i === idx));
+    compNav.querySelectorAll('button').forEach((b, i) => b.classList.toggle('active', i === idx));
+}
+showComponent(0);
+</script>
+</body>
+</html>
